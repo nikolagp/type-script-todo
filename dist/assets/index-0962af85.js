@@ -1,0 +1,10 @@
+var d=Object.defineProperty;var u=(n,e,r)=>e in n?d(n,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):n[e]=r;var i=(n,e,r)=>(u(n,typeof e!="symbol"?e+"":e,r),r);(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))s(t);new MutationObserver(t=>{for(const o of t)if(o.type==="childList")for(const c of o.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&s(c)}).observe(document,{childList:!0,subtree:!0});function r(t){const o={};return t.integrity&&(o.integrity=t.integrity),t.referrerpolicy&&(o.referrerPolicy=t.referrerpolicy),t.crossorigin==="use-credentials"?o.credentials="include":t.crossorigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function s(t){if(t.ep)return;t.ep=!0;const o=r(t);fetch(t.href,o)}})();class a{constructor(e,r){i(this,"task");i(this,"importance");i(this,"isCompleted");this.task=e,this.importance=r,this.isCompleted=!1}format(){return`${this.task} | ${this.importance}`}}class f{constructor(e){this.container=e}render(e){new a(e.task,e.importance);const r=this.container,s=document.createElement("li");s.innerHTML=`
+    <div
+      id="addedTask"
+      class="cursor-pointer my-2 listing bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    >
+    <div class="task-headings">
+      <h2 class="item-task text-2xl">${e.task}</h2>
+      <h3 class="text-xl">Importance: ${e.importance}</h3>
+    </div>
+    </div>`,r.appendChild(s),s.addEventListener("click",function(){e.isCompleted=!0,s.style.textDecoration="line-through"}),s.addEventListener("contextmenu",function(t){t.preventDefault(),r.removeChild(s)})}}const m=document.querySelector("form"),l=document.querySelector("#task"),p=document.querySelector("#importance"),h=document.querySelector("ul"),y=new f(h);m.addEventListener("submit",n=>{n.preventDefault();const e=new a(l.value,p.value);y.render(e),l.value=""});
